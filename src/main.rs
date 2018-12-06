@@ -1,8 +1,10 @@
-use day1::read_input;
+mod file_reader;
+use file_reader::read_input;
 
-mod day1;
 
 fn main() {
     println!("Hello, world!");
-    read_input();
+    for line in read_input("input/problem1.txt") {
+    	println!("{}", line)
+    }
 }
