@@ -1,6 +1,8 @@
-mod problem1;
+use day1::day1::read_input;
+
+mod day1;
 
 fn main() {
     println!("Hello, world!");
-    problem1::read_input();
+    day1::read_input();
 }
