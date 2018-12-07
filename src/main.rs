@@ -1,3 +1,6 @@
+mod day1;
+mod file_reader;
+
 fn main() {
-    println!("Hello, world!");
+    assert_eq!(day1::run(), 474);
 }
