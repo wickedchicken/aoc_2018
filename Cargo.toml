@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["Mike Stipicevic <stip@chromium.org>"]
 
 [dependencies]
+regex = "1.1.0"
