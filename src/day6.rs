@@ -112,15 +112,12 @@ fn count_areas(points: &[Coord]) -> i32 {
         }
     }
 
-    let mut hit_coords = HashSet::new();
-
     // go through and add to hashmap eliminating infinite areas
     for x in bounds.x_l..(bounds.x_h + 1) {
         for y in bounds.y_l..(bounds.y_h + 1) {
             let closest = find_closest(Coord { x: x, y: y }, points);
             if let Some(m) = closest {
                 if !outer_coords.contains(&m) {
-                    hit_coords.insert(m);
                     let area_entry = areas.entry(m).or_insert(0);
                     *area_entry += 1;
                 }
