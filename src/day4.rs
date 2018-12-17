@@ -69,7 +69,7 @@ fn build_time_map(actions: &[GuardLine]) -> HashMap<i32, HashMap<i32, i32>> {
             }
             GuardLine::WakesUp(date_time) => {
                 for minute in last_asleep_time.unwrap()..(date_time.minute) {
-                    let mut guard_map = time_map
+                    let guard_map = time_map
                         .entry(current_guard.unwrap())
                         .or_insert_with(HashMap::new);
                     let minute_entry = guard_map.entry(minute).or_insert(0);
