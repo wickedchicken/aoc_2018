@@ -1,4 +1,4 @@
-use file_reader::read_input;
+use crate::file_reader::read_input;
 use unicode_segmentation::UnicodeSegmentation;
 
 fn process_string(input: Vec<&str>) -> Vec<&str> {
