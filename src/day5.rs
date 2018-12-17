@@ -11,10 +11,7 @@ fn process_string(input: Vec<&str>) -> Vec<&str> {
                 last_char = Some(grapheme);
             }
             Some(g) => {
-                if (g != grapheme) && (g == grapheme.to_uppercase()) {
-                    modified = true;
-                    last_char = None;
-                } else if (g != grapheme) && (g.to_uppercase() == grapheme) {
+                if (g != grapheme) && (g.to_uppercase() == grapheme.to_uppercase()) {
                     modified = true;
                     last_char = None;
                 } else {
@@ -37,10 +34,11 @@ fn process_string(input: Vec<&str>) -> Vec<&str> {
 }
 
 pub fn run() -> usize {
+    let mut final_res = 0;
     for line in read_input("input/input5.txt".to_string()) {
         let graphemes = UnicodeSegmentation::graphemes(line.trim(), true).collect();
         let res = process_string(graphemes);
-        return res.len();
+        final_res += res.len();
     }
-    panic!("No input detected!");
+    return final_res;
 }

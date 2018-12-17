@@ -23,9 +23,11 @@ addons:
 
 before_script:
   - rustup component add rustfmt-preview
+  - rustup component add clippy
 
 script:
   - yamllint .travis.yml
   - cargo fmt --all -- --check
+  - cargo clippy
   - cargo build
   - cargo run
