@@ -12,7 +12,7 @@ struct DateTime {
 }
 
 impl DateTime {
-    fn parse(line: String) -> DateTime {
+    fn parse(line: &str) -> DateTime {
         lazy_static! {
             static ref RE: Regex = Regex::new(r"(\d+)-(\d+)-(\d+) (\d+):(\d+)").unwrap();
         }
@@ -35,21 +35,21 @@ enum GuardLine {
 }
 
 impl GuardLine {
-    fn parse(line: String) -> GuardLine {
+    fn parse(line: &str) -> GuardLine {
         lazy_static! {
             static ref RE: Regex = Regex::new(r"\[(.+)\] (.+)").unwrap();
         }
         let captures = RE.captures(line.trim()).unwrap();
 
         match &captures[2] {
-            "falls asleep" => GuardLine::FallsAsleep(DateTime::parse(captures[1].to_string())),
-            "wakes up" => GuardLine::WakesUp(DateTime::parse(captures[1].to_string())),
+            "falls asleep" => GuardLine::FallsAsleep(DateTime::parse(&captures[1])),
+            "wakes up" => GuardLine::WakesUp(DateTime::parse(&captures[1])),
             _ => {
                 lazy_static! {
                     static ref RE: Regex = Regex::new(r"Guard #(\d+) begins shift").unwrap();
                 }
                 let guard_id = RE.captures(&captures[2]).unwrap()[1].parse().unwrap();
-                GuardLine::Begin(DateTime::parse(captures[1].to_string()), guard_id)
+                GuardLine::Begin(DateTime::parse(&captures[1]), guard_id)
             }
         }
     }
@@ -79,14 +79,14 @@ fn build_time_map(actions: &[GuardLine]) -> HashMap<i32, HashMap<i32, i32>> {
             }
         }
     }
-    return time_map;
+    time_map
 }
 
 pub fn run() -> i32 {
     let mut guard_actions = Vec::new();
 
     for line in read_input("input/input4.txt".to_string()) {
-        guard_actions.push(GuardLine::parse(line));
+        guard_actions.push(GuardLine::parse(&line));
     }
 
     // couldn't get sort_unstable_by_key to work due to some kind of lifetime thing
@@ -114,5 +114,5 @@ pub fn run() -> i32 {
 
     let sleepiest_minute = map[sleepiest_guard.0].iter().max_by_key(|x| x.1).unwrap();
 
-    return sleepiest_guard.0 * sleepiest_minute.0;
+    sleepiest_guard.0 * sleepiest_minute.0
 }

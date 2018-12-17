@@ -6,5 +6,5 @@ pub fn run() -> i32 {
         let line_number: i32 = line.trim().parse().unwrap();
         accumulator += line_number;
     }
-    return accumulator;
+    accumulator
 }

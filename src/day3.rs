@@ -47,5 +47,5 @@ pub fn run() -> usize {
         }
     }
 
-    return collisions.len();
+    collisions.len()
 }
