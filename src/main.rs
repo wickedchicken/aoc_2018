@@ -5,6 +5,7 @@ mod day4;
 mod day5;
 mod day6;
 mod day7;
+mod day8;
 mod file_reader;
 #[macro_use]
 extern crate lazy_static;
@@ -19,4 +20,5 @@ fn main() {
     assert_eq!(day5::run(), 9116);
     assert_eq!(day6::run(), 3882);
     assert_eq!(day7::run(), "LFMNJRTQVZCHIABKPXYEUGWDSO");
+    assert_eq!(day8::run(), 37439);
 }
