@@ -1,4 +1,4 @@
-use file_reader::read_input;
+use crate::file_reader::read_input;
 
 pub fn run() -> i32 {
     let mut accumulator = 0;

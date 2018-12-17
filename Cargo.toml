@@ -2,6 +2,7 @@
 name = "aoc_2018"
 version = "0.1.0"
 authors = ["Mike Stipicevic <stip@chromium.org>"]
+edition = "2018"
 
 [dependencies]
 regex = "1.1.0"
