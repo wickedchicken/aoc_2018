@@ -30,7 +30,7 @@ impl Coord {
         }
     }
 
-    fn manhattan(&self, other: Coord) -> i32 {
+    fn manhattan(self, other: Coord) -> i32 {
         (other.x - self.x).abs() + (other.y - self.y).abs()
     }
 }
@@ -57,7 +57,7 @@ fn find_closest(point: Coord, coords: &[Coord]) -> Option<usize> {
         }
         return None;
     }
-    return Some(distances[0].0);
+    Some(distances[0].0)
 }
 
 fn count_areas(points: &[Coord]) -> i32 {
@@ -66,56 +66,32 @@ fn count_areas(points: &[Coord]) -> i32 {
     let mut areas = HashMap::new();
 
     // exclude top and bottom borders as infinite
-    for x in bounds.x_l..(bounds.x_h + 1) {
-        let lower = find_closest(
-            Coord {
-                x: x,
-                y: bounds.y_l,
-            },
-            points,
-        );
+    for x in bounds.x_l..=bounds.x_h {
+        let lower = find_closest(Coord { x, y: bounds.y_l }, points);
         if let Some(m) = lower {
             outer_coords.insert(m);
         }
-        let upper = find_closest(
-            Coord {
-                x: x,
-                y: bounds.y_h,
-            },
-            points,
-        );
+        let upper = find_closest(Coord { x, y: bounds.y_h }, points);
         if let Some(m) = upper {
             outer_coords.insert(m);
         }
     }
     // exclude left and right borders as infinite
-    for y in bounds.y_l..(bounds.y_h + 1) {
-        let left = find_closest(
-            Coord {
-                x: bounds.x_l,
-                y: y,
-            },
-            points,
-        );
+    for y in bounds.y_l..=bounds.y_h {
+        let left = find_closest(Coord { x: bounds.x_l, y }, points);
         if let Some(m) = left {
             outer_coords.insert(m);
         }
-        let right = find_closest(
-            Coord {
-                x: bounds.x_h,
-                y: y,
-            },
-            points,
-        );
+        let right = find_closest(Coord { x: bounds.x_h, y }, points);
         if let Some(m) = right {
             outer_coords.insert(m);
         }
     }
 
     // go through and add to hashmap eliminating infinite areas
-    for x in bounds.x_l..(bounds.x_h + 1) {
-        for y in bounds.y_l..(bounds.y_h + 1) {
-            let closest = find_closest(Coord { x: x, y: y }, points);
+    for x in bounds.x_l..=bounds.x_h {
+        for y in bounds.y_l..=bounds.y_h {
+            let closest = find_closest(Coord { x, y }, points);
             if let Some(m) = closest {
                 if !outer_coords.contains(&m) {
                     let area_entry = areas.entry(m).or_insert(0);
@@ -125,7 +101,7 @@ fn count_areas(points: &[Coord]) -> i32 {
         }
     }
 
-    return *(areas.values().max().unwrap());
+    *(areas.values().max().unwrap())
 }
 
 pub fn run() -> i32 {
@@ -134,5 +110,5 @@ pub fn run() -> i32 {
         coords.push(Coord::parse(line.trim()));
     }
 
-    return count_areas(&coords);
+    count_areas(&coords)
 }

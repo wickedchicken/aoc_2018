@@ -28,6 +28,6 @@ before_script:
 script:
   - yamllint .travis.yml
   - cargo fmt --all -- --check
-  - cargo clippy
+  - cargo clippy -- -D warnings
   - cargo build
   - cargo run

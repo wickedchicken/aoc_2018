@@ -30,7 +30,7 @@ fn process_string(input: Vec<&str>) -> Vec<&str> {
         return process_string(output);
     }
 
-    return output;
+    output
 }
 
 pub fn run() -> usize {
@@ -40,5 +40,5 @@ pub fn run() -> usize {
         let res = process_string(graphemes);
         final_res += res.len();
     }
-    return final_res;
+    final_res
 }

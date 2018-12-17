@@ -24,5 +24,5 @@ pub fn run() -> i32 {
         }
     }
 
-    return twos * threes;
+    twos * threes
 }

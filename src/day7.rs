@@ -26,7 +26,7 @@ impl Step {
 // builds a hashmap where the key is a candidate step and the values are all
 // the parent steps required before it can start. root nodes have an empty
 // set for a value
-fn build_tree(steps: &Vec<Step>) -> HashMap<&String, HashSet<&String>> {
+fn build_tree(steps: &[Step]) -> HashMap<&String, HashSet<&String>> {
     let mut tree = HashMap::new();
     for step in steps {
         // make a blank entry for any root nodes
@@ -36,7 +36,7 @@ fn build_tree(steps: &Vec<Step>) -> HashMap<&String, HashSet<&String>> {
         tree_entry.insert(&step.parent);
     }
 
-    return tree;
+    tree
 }
 
 fn calculate_next_possible_set<'a>(
@@ -45,14 +45,12 @@ fn calculate_next_possible_set<'a>(
 ) -> Vec<&'a String> {
     let mut candidates = Vec::new();
     for (key, value) in tree.iter() {
-        if !seen.contains(key) {
-            if value.is_subset(&seen) {
-                candidates.push(*key);
-            }
+        if !seen.contains(key) && value.is_subset(&seen) {
+            candidates.push(*key);
         }
     }
     candidates.sort_unstable();
-    return candidates;
+    candidates
 }
 
 fn traverse_tree<'a>(
@@ -65,13 +63,13 @@ fn traverse_tree<'a>(
     }
     let head = res[0];
     seen.insert(head);
-    return format!("{}{}", head, traverse_tree(tree, seen));
+    format!("{}{}", head, traverse_tree(tree, seen))
 }
 
 pub fn run() -> String {
     let stream = read_input("input/input7.txt".to_string());
-    let steps = stream.map(|line| Step::parse(line.trim())).collect();
+    let steps: Vec<Step> = stream.map(|line| Step::parse(line.trim())).collect();
     let tree = build_tree(&steps);
     let seen = HashSet::new();
-    return traverse_tree(tree, seen);
+    traverse_tree(tree, seen)
 }
