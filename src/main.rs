@@ -13,7 +13,7 @@ extern crate regex;
 extern crate unicode_segmentation;
 
 fn main() {
-    assert_eq!(day1::run(), 474);
+    assert_eq!(day1::run(), (474, 137_041));
     assert_eq!(day2::run(), 4693);
     assert_eq!(day3::run(), 97218);
     assert_eq!(day4::run(), 21956);
