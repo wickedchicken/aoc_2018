@@ -15,7 +15,7 @@ extern crate unicode_segmentation;
 fn main() {
     assert_eq!(day1::run(), (474, 137_041));
     assert_eq!(day2::run(), (4693, "pebjqsalrdnckzfihvtxysomg".to_string()));
-    assert_eq!(day3::run(), 97218);
+    assert_eq!(day3::run(), (97218, 717));
     assert_eq!(day4::run(), 21956);
     assert_eq!(day5::run(), 9116);
     assert_eq!(day6::run(), 3882);
