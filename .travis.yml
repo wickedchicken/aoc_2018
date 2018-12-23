@@ -19,6 +19,7 @@ branches:
 addons:
   apt:
     packages:
+      - gperftools
       - yamllint
 
 before_script:
