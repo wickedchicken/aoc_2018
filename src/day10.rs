@@ -94,7 +94,7 @@ fn calculate_area(star_field: &[Point]) -> f64 {
     w_float * h_float
 }
 
-pub fn run() -> f64 {
+pub fn run() -> (f64, u32) {
     let mut star_field = Vec::new();
     for line in read_input("input/input10.txt".to_string()) {
         star_field.push(Point::parse(&line.trim()));
@@ -102,6 +102,7 @@ pub fn run() -> f64 {
 
     let mut area = calculate_area(&star_field);
     let mut previous_star_field = star_field.clone();
+    let mut seconds = 0;
 
     loop {
         star_field.iter_mut().for_each(|x| x.move_point());
@@ -111,7 +112,8 @@ pub fn run() -> f64 {
         }
         previous_star_field = star_field.clone();
         area = new_area;
+        seconds += 1;
     }
     print_field(&previous_star_field);
-    area
+    (area, seconds)
 }
