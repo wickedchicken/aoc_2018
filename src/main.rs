@@ -24,5 +24,7 @@ fn main() {
     assert_eq!(day7::run(), "LFMNJRTQVZCHIABKPXYEUGWDSO");
     assert_eq!(day8::run(), 37439);
     assert_eq!(day9::run(419, 71052), 412_117);
-    assert!((day10::run() - 549.0).abs() < std::f64::EPSILON);
+    let (day10_res, day10_secs) = day10::run();
+    assert!((day10_res - 549.0).abs() < std::f64::EPSILON);
+    assert_eq!(day10_secs, 10274);
 }
