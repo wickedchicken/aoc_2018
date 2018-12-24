@@ -82,7 +82,7 @@ fn build_time_map(actions: &[GuardLine]) -> HashMap<i32, HashMap<i32, i32>> {
     time_map
 }
 
-pub fn run() -> i32 {
+pub fn run() -> (i32, i32) {
     let mut guard_actions = Vec::new();
 
     for line in read_input("input/input4.txt".to_string()) {
@@ -114,5 +114,18 @@ pub fn run() -> i32 {
 
     let sleepiest_minute = map[sleepiest_guard.0].iter().max_by_key(|x| x.1).unwrap();
 
-    sleepiest_guard.0 * sleepiest_minute.0
+    let max_sleepiest_guard = map
+        .iter()
+        .map(|(k, v)| (k, v.values().max()))
+        .max_by_key(|x| x.1)
+        .unwrap();
+    let max_sleepiest_minute = map[max_sleepiest_guard.0]
+        .iter()
+        .max_by_key(|x| x.1)
+        .unwrap();
+
+    (
+        sleepiest_guard.0 * sleepiest_minute.0,
+        max_sleepiest_guard.0 * max_sleepiest_minute.0,
+    )
 }
