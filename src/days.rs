@@ -26,7 +26,7 @@ pub fn day4() {
 }
 
 pub fn day5() {
-    assert_eq!(day5::run(), 9116);
+    assert_eq!(day5::run(), (9116, 6890));
 }
 
 pub fn day6() {
