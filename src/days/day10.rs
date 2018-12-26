@@ -70,8 +70,10 @@ fn find_on_row(row: i32, star_field: &[Point]) -> HashSet<i32> {
     ret
 }
 
-fn print_field(star_field: &[Point]) {
+fn print_field(star_field: &[Point]) -> Vec<String> {
     let dims = MaxDims::calculate(&star_field);
+
+    let mut rows = Vec::new();
 
     for y in (dims.min_y - 1)..=(dims.max_y + 1) {
         let stars_on_row = find_on_row(y, &star_field);
@@ -83,8 +85,10 @@ fn print_field(star_field: &[Point]) {
                 row.push(".");
             }
         }
-        println!("{}", row.join(""));
+        rows.push(row.join("").to_string());
     }
+
+    rows
 }
 
 fn calculate_area(star_field: &[Point]) -> f64 {
@@ -94,7 +98,7 @@ fn calculate_area(star_field: &[Point]) -> f64 {
     w_float * h_float
 }
 
-pub fn run() -> (f64, u32) {
+pub fn run() -> (Vec<String>, f64, u32) {
     let mut star_field = Vec::new();
     for line in read_input("input/input10.txt".to_string()) {
         star_field.push(Point::parse(&line.trim()));
@@ -114,6 +118,6 @@ pub fn run() -> (f64, u32) {
         area = new_area;
         seconds += 1;
     }
-    print_field(&previous_star_field);
-    (area, seconds)
+    let grid = print_field(&previous_star_field);
+    (grid, area, seconds)
 }

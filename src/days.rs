@@ -45,7 +45,7 @@ pub fn day9() {
 }
 
 pub fn day10() {
-    let (day10_res, day10_secs) = day10::run();
+    let (_, day10_res, day10_secs) = day10::run();
     assert!((day10_res - 549.0).abs() < std::f64::EPSILON);
     assert_eq!(day10_secs, 10274);
 }
