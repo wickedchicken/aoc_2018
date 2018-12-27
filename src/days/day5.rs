@@ -3,47 +3,21 @@ use std::collections::HashSet;
 use unicode_segmentation::UnicodeSegmentation;
 
 fn process_string(input: &[String]) -> Vec<String> {
-    let mut output: Vec<usize> = Vec::with_capacity(input.len());
-    let mut input_ints: Vec<usize> = (0..(input.len())).collect();
-    let input_cap: Vec<String> = input.iter().map(|x| x.to_uppercase().to_string()).collect();
-    loop {
-        let mut last_char: Option<usize> = None;
-        let mut modified = false;
-        for idx in input_ints.iter() {
-            match last_char {
-                None => {
-                    last_char = Some(*idx);
-                }
-                Some(last_char_idx) => {
-                    let grapheme = &input[*idx];
-                    let grapheme_cap = &input_cap[*idx];
-                    let last_char_grapheme = &input[last_char_idx];
-                    let last_char_grapheme_cap = &input_cap[last_char_idx];
-                    if (grapheme != last_char_grapheme) && (grapheme_cap == last_char_grapheme_cap)
-                    {
-                        modified = true;
-                        last_char = None;
-                    } else {
-                        output.push(last_char_idx);
-                        last_char = Some(*idx);
-                    }
-                }
-            }
-        }
-        match last_char {
-            None => (),
-            Some(last_char_idx) => {
-                output.push(last_char_idx);
-            }
+    let mut output: Vec<String> = Vec::with_capacity(input.len());
+    for grapheme in input {
+        let last_char = output.pop();
+        if last_char.is_none() {
+            output.push(grapheme.to_string());
+            continue;
         }
 
-        if !modified {
-            return output.iter().map(|x| input[*x].clone()).collect();
+        let last_char = last_char.unwrap();
+        if (*grapheme == last_char) || (grapheme.to_uppercase() != last_char.to_uppercase()) {
+            output.push(last_char);
+            output.push(grapheme.to_string());
         }
-
-        input_ints = output;
-        output = Vec::with_capacity(input.len());
     }
+    output
 }
 
 fn get_letters(input: &[String]) -> HashSet<String> {
