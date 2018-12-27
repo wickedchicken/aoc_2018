@@ -1,5 +1,6 @@
 mod day1;
 mod day10;
+mod day11;
 mod day2;
 mod day3;
 mod day4;
@@ -48,4 +49,8 @@ pub fn day10() {
     let (_, day10_res, day10_secs) = day10::run();
     assert!((day10_res - 549.0).abs() < std::f64::EPSILON);
     assert_eq!(day10_secs, 10274);
+}
+
+pub fn day11() {
+    assert_eq!(day11::run(5034), (235, 63));
 }

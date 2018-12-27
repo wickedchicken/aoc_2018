@@ -4,3 +4,5 @@ mod file_reader;
 extern crate lazy_static;
 extern crate regex;
 extern crate unicode_segmentation;
+#[macro_use]
+extern crate itertools;
