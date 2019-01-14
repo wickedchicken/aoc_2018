@@ -12,4 +12,5 @@ fn main() {
     aoc_2018::days::day9();
     aoc_2018::days::day10();
     aoc_2018::days::day11();
+    aoc_2018::days::day12();
 }

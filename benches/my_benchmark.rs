@@ -43,6 +43,9 @@ fn day10(c: &mut Criterion) {
 fn day11(c: &mut Criterion) {
     c.bench_function("day11", |b| b.iter(|| aoc_2018::days::day11()));
 }
+fn day12(c: &mut Criterion) {
+    c.bench_function("day12", |b| b.iter(|| aoc_2018::days::day12()));
+}
 
 criterion_group! {
     name = benches;
@@ -59,5 +62,6 @@ criterion_group! {
         day9,
         day10,
         day11,
+        day12,
 }
 criterion_main!(benches);
