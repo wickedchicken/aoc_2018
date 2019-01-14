@@ -1,6 +1,7 @@
 mod day1;
 mod day10;
 mod day11;
+mod day12;
 mod day2;
 mod day3;
 mod day4;
@@ -53,4 +54,8 @@ pub fn day10() {
 
 pub fn day11() {
     assert_eq!(day11::run(5034), (235, 63));
+}
+
+pub fn day12() {
+    assert_eq!(day12::run(), 3890);
 }
